@@ -1,0 +1,35 @@
+latin = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+     'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+cyrylic = ['а','б', 'в', 'г', 'д', 'е', 'є', 'ж', 'з', 'и', 'і', 'ї', 'й', 'к', 'л',
+     'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч',
+     'ш', 'щ', 'ь', 'ю', 'я']
+
+def encrypt(chars, alphabet):
+    shift = 1
+    numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    d = ''
+    for char in chars:
+        if char in alphabet:
+            d += alphabet[(alphabet.index(char) + shift) % len(alphabet)]
+        elif char.lower() in alphabet:
+            d += alphabet[(alphabet.index(char.lower()) + shift) % len(alphabet)].upper()
+        elif char in numbers:
+            d += numbers[(numbers.index(char) + shift) % len(numbers)]
+        elif char == ' ':
+            d += ' '
+        else:
+            print('Undefined symbol!')
+    print('Результат: "' + d + '"')
+
+
+a = input('Яку мову використоввати? (1 - English; 2 - Українська): ')
+
+if a == '1':
+    chars = list(input('Enter text in English: '))
+    encrypt(chars, latin)
+elif a == '2':
+    chars = list(input('Введи текст українською мовою: '))
+    encrypt(chars, cyrylic)
+else:
+    print('Undefined language!')
